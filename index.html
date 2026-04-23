@@ -3,9 +3,58 @@
 <head>
 <meta charset="utf-8"/>
 <title>어바웃피싱 × 하나손해보험 · H안 프로토타입 R60</title>
+<meta name="theme-color" content="#0041FF"/>
 <meta name="viewport" content="width=1280"/>
-<link rel="stylesheet" href="_H안_자산/colors_and_type.css"/>
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.css" />
 <style>
+  /* ============ DESIGN TOKENS (inlined from colors_and_type.css) ============ */
+  :root {
+    --af-blue: #0041FF;
+    --af-blue-press: #0033CC;
+    --af-blue-bg: #EEF8FF;
+    --af-blue-bg-2: #F2F5FA;
+    --fg-1: #191919;
+    --fg-2: #363636;
+    --fg-3: #767676;
+    --fg-4: #999999;
+    --fg-5: #AAAAAA;
+    --fg-disabled: #CCCCCC;
+    --bg: #FFFFFF;
+    --surface-1: #F8F8F8;
+    --surface-2: #F3F3F3;
+    --surface-3: #EEEEEE;
+    --surface-cool: #F5F7FA;
+    --surface-cool-2: #F2F5FA;
+    --border-1: #EEEEEE;
+    --border-2: #E0E0E0;
+    --border-3: #E1E8F1;
+    --red: #EE0005;
+    --red-2: #FF0000;
+    --red-3: #FF3C3A;
+    --orange: #FF4C14;
+    --orange-soft: #FFA77B;
+    --yellow: #FFD91E;
+    --green: #245C45;
+    --green-lime: #B9E100;
+    --purple: #6433DF;
+    --radius-xs: 4px;
+    --radius-sm: 5px;
+    --radius-md: 8px;
+    --radius-lg: 12px;
+    --radius-xl: 18px;
+    --radius-2xl: 22px;
+    --radius-pill: 1000px;
+    --space-1: 4px; --space-2: 8px; --space-3: 12px; --space-4: 16px;
+    --space-5: 20px; --space-6: 24px; --space-7: 32px;
+    --gutter: 18px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.04);
+    --shadow-md: 0 4px 12px rgba(0,0,0,0.08);
+    --shadow-lg: 0 8px 24px rgba(25,25,25,0.12);
+    --shadow-modal: 0 20px 60px rgba(0,0,0,0.35);
+    --font-sans: "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont,
+      "Apple SD Gothic Neo", "Noto Sans KR", "Spoqa Han Sans Neo", sans-serif;
+    --letter-tight: -0.4px;
+  }
   * { box-sizing: border-box; margin: 0; padding: 0; }
   html, body {
     font-family: var(--font-sans);
@@ -97,8 +146,16 @@
   /* ============ 01 HOME ============ */
   .hero-banner { margin: 14px 20px 0; border-radius: var(--radius-lg); height: 196px; position: relative; overflow: hidden; background: var(--surface-2); }
   .hero-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
+  .hero-banner.hero-illust { background: #1D2E6A; }
+  .hero-banner .hero-art { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .hero-banner.hero-illust .hero-overlay { background: linear-gradient(180deg, transparent 0%, rgba(5,12,38,0.35) 50%, rgba(5,12,38,0.78) 100%); }
   .hero-pill { position: absolute; top: 14px; left: 14px; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: var(--radius-pill); background: rgba(255,255,255,0.95); font-size: 11px; font-weight: 800; color: #009490; letter-spacing: var(--letter-tight); z-index: 2; }
   .hero-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #009490; }
+  .hero-pill-logo { padding: 5px 12px; gap: 0; background: white; box-shadow: 0 4px 12px rgba(0,0,0,0.12); }
+  .hero-pill-logo::before { display: none; }
+  .hero-pill-logo .hana-logo-img { height: 16px; width: auto; display: block; }
+  .hero-pill-logo .hana-logo-text { display: none; font-size: 12px; font-weight: 800; color: #3A3A3A; letter-spacing: -0.4px; }
+  .hero-pill-logo .hana-logo-text.show { display: inline-block; }
   .hero-overlay { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 16px 16px; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.88) 100%); color: white; }
   .hero-overlay .hero-kicker { font-size: 11px; font-weight: 500; opacity: 0.9; margin-bottom: 4px; }
   .hero-overlay .hero-title { font-size: 20px; font-weight: 800; line-height: 1.2; letter-spacing: var(--letter-tight); }
@@ -302,8 +359,9 @@
 
   .insure-banner { margin: 16px 20px 0; padding: 14px 16px; background: var(--af-blue-bg); border: 1px solid rgba(0,65,255,0.12); border-radius: var(--radius-lg); }
   .insure-banner .ib-top { display: flex; align-items: center; gap: 8px; }
-  .ib-chip-hana { display: inline-flex; align-items: center; gap: 5px; padding: 4px 9px; border-radius: var(--radius-pill); background: white; color: var(--af-blue); font-size: 11px; font-weight: 700; border: 1px solid var(--af-blue); }
-  .ib-chip-hana::before { content: ''; width: 12px; height: 12px; border-radius: 3px; background: var(--af-blue); display: inline-block; }
+  .ib-chip-hana { display: inline-flex; align-items: center; gap: 6px; padding: 4px 10px 4px 6px; border-radius: var(--radius-pill); background: white; color: #3A3A3A; font-size: 11px; font-weight: 800; border: 1px solid #E0E0E0; letter-spacing: -0.4px; white-space: nowrap; width: fit-content; max-width: 100%; flex-shrink: 0; }
+  .ib-chip-hana .hana-logo-img { height: 16px; width: 14px; object-fit: contain; display: block; flex-shrink: 0; }
+  .ib-chip-hana .ib-chip-label { white-space: nowrap; }
   .ib-stat { font-size: 11px; color: var(--fg-3); font-weight: 600; }
   .ib-stat b { color: var(--af-blue); font-weight: 800; }
   .insure-banner .ib-head { margin-top: 10px; font-size: 14px; font-weight: 700; color: var(--fg-1); letter-spacing: var(--letter-tight); }
@@ -642,7 +700,10 @@
   /* AF = 어바웃피싱 블루(#3182F6), HN = 하나손해보험 틸그린(#009490) — 로고/태그 색상 명확 분리 */
   .alim-sender-av { width: 26px; height: 26px; border-radius: 6px; }
   .alim-sender-av.af { background: #3182F6; }
-  .alim-sender-av.hn { background: #009490; }
+  .alim-sender-av.hn { background: white; border: 1px solid var(--border-1); padding: 2px; }
+  .alim-sender-av.hn img { width: 100%; height: 100%; object-fit: contain; display: block; }
+  .alim-sender-av.hn .hana-fallback { display: none; color: white; font-size: 9px; font-weight: 800; align-items: center; justify-content: center; width: 100%; height: 100%; background: #009490; border-radius: inherit; }
+  .alim-sender-av.hn .hana-fallback.show { display: inline-flex; }
   .alim-sender-name { font-size: 12px; font-weight: 800; }
   .alim-sender-name.af { color: #3182F6; }
   .alim-sender-name.hn { color: #009490; }
@@ -840,48 +901,127 @@
   .detail-sticky-topbar .right-btns { display: flex; gap: 8px; }
 
   /* ============ 05 — COMPACT CARD ============ */
-  /* ============ 05 COMPACT HANA CARD — clean refactor ============ */
-  .compact-hana-card { margin: 12px 20px 0; padding: 18px 18px 16px; background: white; border: 1px solid var(--border-1); border-radius: var(--radius-lg); }
-  .compact-hana-card .chc-head { display: flex; align-items: flex-start; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid var(--border-1); }
-  .compact-hana-card .chc-mark { width: 36px; height: 36px; border-radius: 9px; background: var(--af-blue); color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; flex-shrink: 0; letter-spacing: 0; }
-  .compact-hana-card .chc-head-text { flex: 1; min-width: 0; padding-top: 1px; }
-  .compact-hana-card .chc-title { font-size: 15px; font-weight: 800; color: var(--fg-1); letter-spacing: var(--letter-tight); line-height: 1.3; }
-  .compact-hana-card .chc-sub { font-size: 12px; color: var(--fg-3); margin-top: 3px; letter-spacing: var(--letter-tight); }
-  .compact-hana-card .chc-free { padding: 5px 10px; border-radius: var(--radius-pill); background: var(--af-blue); color: white; font-size: 11px; font-weight: 800; letter-spacing: var(--letter-tight); flex-shrink: 0; align-self: center; }
+  /* ============ 05 COMPACT HANA CARD — minimal clean v2 ============ */
+  .compact-hana-card { margin: 12px 20px 0; padding: 20px; background: white; border: 1px solid var(--border-1); border-radius: var(--radius-xl); }
 
-  /* Definition list — clean table w/ even row heights */
-  .compact-hana-card .chc-dl { display: grid; grid-template-columns: 88px 1fr; row-gap: 0; margin-top: 4px; }
-  .compact-hana-card .chc-dl > div { padding: 12px 0; border-bottom: 1px solid var(--border-1); display: flex; align-items: center; min-height: 44px; }
-  .compact-hana-card .chc-dl > div.chc-dk { color: var(--fg-3); font-size: 13px; font-weight: 500; }
-  .compact-hana-card .chc-dl > div.chc-dv { color: var(--fg-1); font-size: 13.5px; font-weight: 700; letter-spacing: var(--letter-tight); justify-content: flex-end; text-align: right; gap: 6px; }
-  .compact-hana-card .chc-dl > div:nth-last-child(-n+2) { border-bottom: none; }
-  .compact-hana-card .chc-strike { text-decoration: line-through; color: var(--fg-4); font-weight: 500; font-size: 12.5px; }
-  .compact-hana-card .chc-free-inline { color: var(--af-blue); font-weight: 800; font-size: 14px; }
-  .compact-hana-card .chc-tag { padding: 3px 8px; border-radius: var(--radius-xs); background: var(--af-blue-bg); color: var(--af-blue); font-size: 10.5px; font-weight: 800; letter-spacing: -0.2px; }
+  /* Header — HN mark + title stack + floating chip */
+  .compact-hana-card .chc-head { display: flex; align-items: center; gap: 11px; padding-bottom: 16px; border-bottom: 1px solid var(--surface-3); position: relative; }
+  .compact-hana-card .chc-mark { width: 34px; height: 34px; border-radius: 10px; background: var(--af-blue); color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; letter-spacing: 0; }
+  .compact-hana-card .chc-head-text { flex: 1; min-width: 0; }
+  .compact-hana-card .chc-title { font-size: 14px; font-weight: 800; color: var(--fg-1); letter-spacing: -0.5px; line-height: 1.3; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .compact-hana-card .chc-sub { font-size: 11px; color: var(--fg-3); margin-top: 3px; letter-spacing: -0.3px; line-height: 1.35; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .compact-hana-card .chc-free { padding: 5px 11px; border-radius: var(--radius-pill); background: var(--af-blue); color: white; font-size: 10.5px; font-weight: 800; letter-spacing: -0.2px; flex-shrink: 0; white-space: nowrap; }
 
-  /* Coverage section header */
-  .compact-hana-card .chc-cov-head { display: flex; justify-content: space-between; align-items: baseline; margin-top: 18px; padding-bottom: 10px; border-bottom: 1px solid var(--border-1); }
+  /* Definition list — clean aligned rows */
+  .compact-hana-card .chc-dl { display: grid; grid-template-columns: 78px 1fr; align-items: center; }
+  .compact-hana-card .chc-dl .chc-dk { padding: 13px 0; color: var(--fg-3); font-size: 12.5px; font-weight: 500; border-bottom: 1px solid var(--surface-3); }
+  .compact-hana-card .chc-dl .chc-dv { padding: 13px 0; color: var(--fg-1); font-size: 12.5px; font-weight: 700; letter-spacing: -0.3px; text-align: right; border-bottom: 1px solid var(--surface-3); display: inline-flex; align-items: center; justify-content: flex-end; gap: 6px; white-space: nowrap; min-width: 0; }
+  .compact-hana-card .chc-dl .chc-dk:nth-last-of-type(1),
+  .compact-hana-card .chc-dl .chc-dv:nth-last-of-type(1) { border-bottom: none; }
+  .compact-hana-card .chc-strike { text-decoration: line-through; color: var(--fg-4); font-weight: 500; font-size: 12px; }
+  .compact-hana-card .chc-free-inline { color: var(--af-blue); font-weight: 800; font-size: 14px; letter-spacing: -0.3px; }
+  .compact-hana-card .chc-tag { padding: 3px 7px; border-radius: var(--radius-xs); background: var(--af-blue-bg); color: var(--af-blue); font-size: 10px; font-weight: 800; letter-spacing: -0.3px; }
+
+  /* Coverage section — softly separated with surface tint */
+  .compact-hana-card .chc-cov-block { margin-top: 16px; padding: 14px 0 2px; border-top: 1px solid var(--surface-3); }
+  .compact-hana-card .chc-cov-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 4px; }
   .compact-hana-card .chc-cov-label { font-size: 13px; font-weight: 800; color: var(--fg-1); letter-spacing: var(--letter-tight); }
   .compact-hana-card .chc-cov-total { font-size: 11.5px; font-weight: 700; color: var(--af-blue); letter-spacing: -0.2px; }
+  .compact-hana-card .chc-cov-total b { font-size: 12.5px; }
 
-  /* Coverage grid — properly aligned 2-col table */
-  .compact-hana-card .chc-cov { display: grid; grid-template-columns: 1fr 1fr; gap: 0; margin-top: 4px; }
-  .compact-hana-card .chc-cov .cov-row { display: grid; grid-template-columns: 1fr auto; gap: 8px; padding: 11px 0; align-items: baseline; border-bottom: 1px solid var(--border-1); }
-  .compact-hana-card .chc-cov .cov-row:nth-child(odd) { padding-right: 14px; margin-right: 6px; border-right: 1px solid var(--border-1); }
-  .compact-hana-card .chc-cov .cov-row:nth-child(even) { padding-left: 8px; }
-  .compact-hana-card .chc-cov .cov-row:nth-last-child(-n+2) { border-bottom: none; }
-  .compact-hana-card .chc-cov .cov-row .k { color: var(--fg-3); font-size: 12px; letter-spacing: -0.3px; }
-  .compact-hana-card .chc-cov .cov-row .v { color: var(--fg-1); font-weight: 800; font-size: 13px; letter-spacing: var(--letter-tight); }
-  .compact-hana-card .chc-cov .cov-row .v.inc { color: var(--af-blue); font-size: 12px; }
+  /* Coverage grid — 2x3 with right-aligned values, no internal dividers */
+  .compact-hana-card .chc-cov { display: grid; grid-template-columns: 1fr 1fr; column-gap: 18px; row-gap: 2px; margin-top: 10px; }
+  .compact-hana-card .chc-cov .cov-row { display: flex; justify-content: space-between; align-items: baseline; padding: 9px 0; border-bottom: 1px dotted var(--surface-3); }
+  .compact-hana-card .chc-cov .cov-row:last-child,
+  .compact-hana-card .chc-cov .cov-row:nth-last-child(2) { border-bottom: none; }
+  .compact-hana-card .chc-cov .cov-row .k { color: var(--fg-3); font-size: 11.5px; letter-spacing: -0.4px; font-weight: 500; white-space: nowrap; }
+  .compact-hana-card .chc-cov .cov-row .v { color: var(--fg-1); font-weight: 800; font-size: 12.5px; letter-spacing: -0.3px; white-space: nowrap; }
+  .compact-hana-card .chc-cov .cov-row .v.inc { color: var(--af-blue); font-size: 11.5px; font-weight: 700; }
 
-  /* Next steps — cleaner horizontal step bar */
+  /* Next steps */
   .compact-hana-card .chc-next { margin-top: 16px; padding: 14px 14px 12px; background: var(--af-blue-bg); border-radius: var(--radius-md); }
   .compact-hana-card .chc-next-title { font-size: 12px; font-weight: 800; color: var(--af-blue); letter-spacing: var(--letter-tight); margin-bottom: 10px; }
   .compact-hana-card .chc-next-row { display: flex; gap: 10px; align-items: center; padding: 4px 0; font-size: 12px; color: var(--fg-2); line-height: 1.4; }
   .compact-hana-card .chc-step { display: inline-flex; align-items: center; justify-content: center; width: 20px; height: 20px; border-radius: 50%; background: var(--af-blue); color: white; font-size: 10px; font-weight: 800; flex-shrink: 0; }
 
-  .compact-hana-card .chc-foot { margin-top: 14px; padding-top: 12px; border-top: 1px dashed var(--border-1); font-size: 11px; color: var(--fg-3); line-height: 1.6; letter-spacing: -0.2px; }
+  .compact-hana-card .chc-foot { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--surface-3); font-size: 11px; color: var(--fg-3); line-height: 1.65; letter-spacing: -0.2px; }
   .compact-hana-card .chc-foot strong, .compact-hana-card .chc-foot b { color: var(--af-blue); font-weight: 700; }
+
+  /* ============ ABOUT HANA SUB-PAGE ============ */
+  .ah-hero { padding: 28px 24px 32px; background: linear-gradient(160deg, #0B1A3A 0%, #0041FF 85%, #003ADE 100%); color: white; position: relative; overflow: hidden; }
+  .ah-hero::before { content: ''; position: absolute; right: -60px; top: -50px; width: 240px; height: 240px; border-radius: 50%; background: radial-gradient(circle, rgba(255,255,255,0.14) 0%, transparent 70%); }
+  .ah-hero::after { content: ''; position: absolute; left: -40px; bottom: -40px; width: 160px; height: 160px; border: 1px solid rgba(255,255,255,0.12); border-radius: 50%; }
+  .ah-hero .ah-eyebrow { display: inline-flex; align-items: center; gap: 7px; padding: 6px 12px; border-radius: var(--radius-pill); background: rgba(255,255,255,0.14); font-size: 11px; font-weight: 800; letter-spacing: 0.12em; backdrop-filter: blur(10px); margin-bottom: 18px; }
+  .ah-hero .ah-eyebrow::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #4FD4C4; }
+  .ah-hero .ah-title { font-size: 26px; font-weight: 800; line-height: 1.25; letter-spacing: var(--letter-tight); position: relative; z-index: 2; }
+  .ah-hero .ah-subtitle { margin-top: 10px; font-size: 13px; color: rgba(255,255,255,0.8); line-height: 1.55; position: relative; z-index: 2; }
+  .ah-hero .ah-stats { margin-top: 20px; display: grid; grid-template-columns: 1fr 1fr; gap: 8px; position: relative; z-index: 2; }
+  .ah-hero .ah-stat { padding: 10px 12px; background: rgba(255,255,255,0.12); border: 1px solid rgba(255,255,255,0.14); border-radius: var(--radius-md); font-size: 11.5px; font-weight: 600; letter-spacing: -0.2px; backdrop-filter: blur(8px); }
+
+  .ah-section { padding: 28px 20px 8px; }
+  .ah-section + .ah-section { padding-top: 12px; }
+  .ah-section .ah-label { font-size: 11px; font-weight: 800; letter-spacing: 0.14em; color: var(--af-blue); margin-bottom: 8px; display: inline-flex; align-items: center; gap: 6px; }
+  .ah-section .ah-label::before { content: ''; width: 14px; height: 1px; background: currentColor; }
+  .ah-section .ah-stitle { font-size: 20px; font-weight: 800; color: var(--fg-1); letter-spacing: var(--letter-tight); line-height: 1.3; }
+  .ah-section .ah-sbody { margin-top: 8px; font-size: 13px; color: var(--fg-3); line-height: 1.65; }
+
+  /* icon-list */
+  .ah-icons { margin-top: 16px; display: grid; gap: 10px; }
+  .ah-icons .ah-icon-row { display: flex; gap: 12px; padding: 14px; background: white; border: 1px solid var(--border-1); border-radius: var(--radius-md); align-items: flex-start; }
+  .ah-icons .ah-ico { width: 36px; height: 36px; border-radius: 9px; background: var(--af-blue-bg); color: var(--af-blue); display: inline-flex; align-items: center; justify-content: center; flex-shrink: 0; }
+  .ah-icons .ah-icon-info .ah-it { font-size: 13.5px; font-weight: 800; color: var(--fg-1); letter-spacing: var(--letter-tight); }
+  .ah-icons .ah-icon-info .ah-id { font-size: 12px; color: var(--fg-3); margin-top: 3px; line-height: 1.55; white-space: pre-line; }
+
+  /* kv-table coverage */
+  .ah-kv { margin-top: 16px; background: white; border: 1px solid var(--border-1); border-radius: var(--radius-lg); overflow: hidden; }
+  .ah-kv-row { display: grid; grid-template-columns: 1fr auto; gap: 12px; padding: 14px 16px; align-items: center; border-bottom: 1px solid var(--border-1); }
+  .ah-kv-row:last-child { border-bottom: none; }
+  .ah-kv-row .ah-kv-label { font-size: 13px; color: var(--fg-2); font-weight: 600; }
+  .ah-kv-row .ah-kv-label small { display: block; font-size: 11px; color: var(--fg-3); font-weight: 400; margin-top: 2px; letter-spacing: -0.2px; }
+  .ah-kv-row .ah-kv-val { font-size: 15px; color: var(--af-blue); font-weight: 800; letter-spacing: var(--letter-tight); text-align: right; }
+  .ah-kv-foot { padding: 12px 16px; background: var(--af-blue-bg); display: flex; justify-content: space-between; font-size: 12px; font-weight: 800; color: var(--af-blue); }
+
+  /* horizontal 4-step process (심플 가로 배치) */
+  .ah-hsteps { margin-top: 18px; display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; position: relative; padding: 0 4px; }
+  .ah-hsteps::before { content: ''; position: absolute; top: 14px; left: 16%; right: 16%; height: 1px; background: var(--border-2); z-index: 0; }
+  .ah-hs-col { display: flex; flex-direction: column; align-items: center; text-align: center; position: relative; z-index: 1; }
+  .ah-hs-num { width: 28px; height: 28px; border-radius: 50%; background: var(--af-blue); color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 800; margin-bottom: 10px; box-shadow: 0 0 0 4px white; }
+  .ah-hs-label { font-size: 12px; font-weight: 800; color: var(--fg-1); letter-spacing: -0.3px; line-height: 1.35; }
+  .ah-hs-desc { font-size: 11px; color: var(--fg-3); margin-top: 4px; line-height: 1.45; letter-spacing: -0.3px; }
+
+  /* comparison table */
+  .ah-compare { margin-top: 16px; background: white; border: 1px solid var(--border-1); border-radius: var(--radius-lg); overflow: hidden; }
+  .ah-compare-head { display: grid; grid-template-columns: 1fr 1fr 1fr; background: var(--surface-1); font-size: 10.5px; font-weight: 800; letter-spacing: 0.04em; color: var(--fg-2); text-align: center; padding: 10px 8px; border-bottom: 1px solid var(--border-1); }
+  .ah-compare-head .ch-none { color: #C40005; }
+  .ah-compare-head .ch-ok { color: var(--af-blue); }
+  .ah-compare-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 8px; padding: 12px 10px; border-bottom: 1px solid var(--border-1); font-size: 11px; }
+  .ah-compare-row:last-child { border-bottom: none; }
+  .ah-compare-row .cr-asp { color: var(--fg-2); font-weight: 600; padding-right: 4px; }
+  .ah-compare-row .cr-un { color: #C40005; font-weight: 500; text-align: center; letter-spacing: -0.3px; }
+  .ah-compare-row .cr-in { color: var(--af-blue); font-weight: 700; text-align: center; letter-spacing: -0.3px; }
+
+  /* callout */
+  .ah-callout { margin-top: 16px; padding: 16px 18px; background: var(--af-blue-bg); border-left: 3px solid var(--af-blue); border-radius: var(--radius-md); }
+  .ah-callout.neutral { background: var(--surface-1); border-left-color: var(--fg-3); }
+  .ah-callout .ah-co-title { font-size: 13.5px; font-weight: 800; color: var(--fg-1); letter-spacing: var(--letter-tight); }
+  .ah-callout .ah-co-body { margin-top: 6px; font-size: 12px; color: var(--fg-2); line-height: 1.6; white-space: pre-line; }
+
+  /* faq */
+  .ah-faq { margin-top: 16px; }
+  .ah-faq-item { background: white; border: 1px solid var(--border-1); border-radius: var(--radius-md); margin-bottom: 8px; overflow: hidden; }
+  .ah-faq-q { padding: 14px 16px; display: flex; align-items: center; gap: 10px; cursor: pointer; }
+  .ah-faq-q .q-mark { width: 22px; height: 22px; border-radius: 50%; background: var(--af-blue); color: white; display: inline-flex; align-items: center; justify-content: center; font-size: 11px; font-weight: 800; flex-shrink: 0; }
+  .ah-faq-q .q-txt { flex: 1; font-size: 13px; font-weight: 700; color: var(--fg-1); letter-spacing: var(--letter-tight); line-height: 1.45; }
+  .ah-faq-q .q-chev { color: var(--fg-3); transition: transform 0.2s; flex-shrink: 0; }
+  .ah-faq-item.open .ah-faq-q .q-chev { transform: rotate(180deg); }
+  .ah-faq-a { padding: 0 16px 14px 48px; font-size: 12.5px; color: var(--fg-2); line-height: 1.65; display: none; }
+  .ah-faq-item.open .ah-faq-a { display: block; }
+
+  .ah-legal-foot { padding: 20px 20px 8px; font-size: 10.5px; color: var(--fg-4); line-height: 1.65; border-top: 1px solid var(--border-1); margin-top: 20px; }
+
+  /* FAB sticky-in-scroll wrapper */
+  .fab-layer { position: sticky; bottom: 0; z-index: 10; height: 0; pointer-events: none; }
+  .fab-layer .fab-chat { position: absolute; right: 20px; bottom: 24px; pointer-events: auto; }
 
   @media (max-width: 1180px) {
     .main { grid-template-columns: 1fr; gap: 40px; max-width: 680px; }
@@ -980,15 +1120,15 @@ const RESERVATION = {
 };
 
 const BOATS = [
-  { id: 'samsung', name: '삼성호', loc: '부산 감천항', dist: '2.3km', rating: 4.9, reviews: 142, price: 80000, live: 4, fish: ['주꾸미','갑오징어'], img: '_H안_자산/boats/boat-1.jpg' },
-  { id: 'manseon', name: '만선호', loc: '충남 태안항', dist: '180km', rating: 4.8, reviews: 203, price: 75000, live: 2, fish: ['갈치','우럭'], img: '_H안_자산/boats/boat-2.jpg' },
-  { id: 'daewoo',  name: '대우호', loc: '인천 소래포구', dist: '95km', rating: 4.7, reviews: 187, price: 70000, live: 1, fish: ['광어','감성돔'], img: '_H안_자산/boats/boat-3.jpg' },
-  { id: 'hyundai', name: '현대호', loc: '울산 방어진', dist: '220km', rating: 4.9, reviews: 298, price: 90000, live: 3, fish: ['참돔','방어'], img: '_H안_자산/boats/boat-4.jpg' },
+  { id: 'samsung', name: '삼성호', loc: '부산 감천항', dist: '2.3km', rating: 4.9, reviews: 142, price: 80000, live: 4, fish: ['주꾸미','갑오징어'], img: 'assets/boats/boat-1.jpg' },
+  { id: 'manseon', name: '만선호', loc: '충남 태안항', dist: '180km', rating: 4.8, reviews: 203, price: 75000, live: 2, fish: ['갈치','우럭'], img: 'assets/boats/boat-2.jpg' },
+  { id: 'daewoo',  name: '대우호', loc: '인천 소래포구', dist: '95km', rating: 4.7, reviews: 187, price: 70000, live: 1, fish: ['광어','감성돔'], img: 'assets/boats/boat-3.jpg' },
+  { id: 'hyundai', name: '현대호', loc: '울산 방어진', dist: '220km', rating: 4.9, reviews: 298, price: 90000, live: 3, fish: ['참돔','방어'], img: 'assets/boats/boat-4.jpg' },
 ];
 
 const CATCH_POSTS = [
-  { id:1, name:'김선장', boat:'삼성호', when:'2시간 전 · 부산 감천항', body:'오늘 <b>주꾸미 1인당 30마리+</b> 대박났어요. 내일 새벽 출항 남은 자리 있습니다. 바람 약하고 물때 최상.', imgs: ['_H안_자산/catches/catch-1.jpg','_H안_자산/catches/catch-2.jpg'], likes: 47, cmts: 12 },
-  { id:2, name:'이선장', boat:'만선호', when:'5시간 전 · 충남 태안항', body:'<b>갈치 80cm급</b> 연타! 태안 앞바다 조황 아주 좋습니다. 이번주 주말 마감 임박.', imgs: ['_H안_자산/catches/catch-3.jpg'], likes: 82, cmts: 24 },
+  { id:1, name:'김선장', boat:'삼성호', when:'2시간 전 · 부산 감천항', body:'오늘 <b>주꾸미 1인당 30마리+</b> 대박났어요. 내일 새벽 출항 남은 자리 있습니다. 바람 약하고 물때 최상.', imgs: ['assets/catches/catch-1.jpg','assets/catches/catch-2.jpg'], likes: 47, cmts: 12 },
+  { id:2, name:'이선장', boat:'만선호', when:'5시간 전 · 충남 태안항', body:'<b>갈치 80cm급</b> 연타! 태안 앞바다 조황 아주 좋습니다. 이번주 주말 마감 임박.', imgs: ['assets/catches/catch-3.jpg'], likes: 82, cmts: 24 },
 ];
 
 /* ============ BRIEFING ============ */
@@ -1070,6 +1210,13 @@ const BRIEFING = {
       {p:'P2', t:'증권번호·보장액 노출 — 본문 포함 vs 고정 템플릿 링크', o:'하나 검토'},
     ],
     fit: { v: 'ok', txt: '한 화면에 2건 발송 프리뷰를 같이 노출함으로써 "예약·보험이 한 세트로 마무리됐다"는 메시지가 즉시 전달됩니다.'},
+  },
+  about_hana: {
+    title: '서브 · 하나손보 안내',
+    sub: '홈 히어로 → 상세 안내 서브페이지',
+    intent: '홈 상단 히어로 배너 클릭 시 진입하는 <b>하나손해보험 선상보험 상세 안내 페이지</b>. 제안서 v6 내용과 정합 — 기업제휴형 단체계약, 선상 상해 한정형 보장, 사망·집결지 이동·승하선 전후·귀가·숙박 제외 등 상품 구조를 사용자 관점으로 풀어서 전달.',
+    decisions: [],
+    fit: { v: 'ok', txt: '판매 주체 분리(<b>하나손보가 보험 판매, AF는 중개 채널</b>)를 명확히 표기하고 면책사항까지 페이지 하단에 투명하게 노출 — 금감원 표시·광고 규정과 정합.'},
   },
 };
 
@@ -1268,7 +1415,7 @@ const RC_PHOTOS = {
 };
 function rcPhoto(filename, cap) {
   // 실제 유저 업로드 후기 사진. 파일 로드 실패 시 해당 슬롯 전체 제거.
-  return `<div class="rc-photo"><img src="_H안_자산/reviews/${filename}" alt="${cap}" onerror="this.parentElement.remove()"/><span class="rc-cap">${cap}</span></div>`;
+  return `<div class="rc-photo"><img src="assets/reviews/${filename}" alt="${cap}" onerror="this.parentElement.remove()"/><span class="rc-cap">${cap}</span></div>`;
 }
 
 /* ============ 최근 입항 실사 SVG (첨부 사진 재현) ============ */
@@ -1427,7 +1574,7 @@ function statusBar(dark) {
     <span>오전 5:42</span>
     <span class="status-right" style="display:flex;gap:4px;align-items:center;">
       <svg width="17" height="11" viewBox="0 0 18 12" fill="currentColor"><path d="M1 7h2v4H1V7zm4-2h2v6H5V5zm4-2h2v8H9V3zm4-2h2v10h-2V1z"/></svg>
-      <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M8 3C5.95 3 4.06 3.67 2.54 4.8c-.3.22-.32.65-.04.89l1.42 1.42c.24.24.62.26.89.05A6 6 0 0 1 8 6c1.52 0 2.92.56 4.01 1.49.26.22.64.2.89-.05l1.42-1.42c.28-.24.26-.67-.04-.89A9.97 9.97 0 0 0 8 3z"/></svg>
+      <svg width="15" height="11" viewBox="0 0 16 12" fill="currentColor"><path d="M8 2C5.24 2 2.7 2.96.7 4.57c-.3.24-.32.68-.05.95l.94.95c.24.24.62.26.89.04A8 8 0 0 1 8 4.5c1.93 0 3.7.68 5.08 1.82.26.22.65.2.89-.04l.94-.95c.27-.27.25-.71-.05-.95C12.84 2.79 10.47 2 8 2zm0 3.5c-1.76 0-3.38.61-4.64 1.63-.3.24-.32.68-.05.95l.88.88c.24.24.62.26.9.05A4.5 4.5 0 0 1 8 8c1.1 0 2.11.4 2.9 1.04.28.21.66.19.9-.05l.88-.88c.27-.27.26-.71-.05-.95A7.47 7.47 0 0 0 8 5.5zm0 3.5a2 2 0 0 0-1.41.59l1.06 1.06a.5.5 0 0 0 .71 0l1.06-1.06A2 2 0 0 0 8 9z"/></svg>
       <svg width="25" height="12" viewBox="0 0 27 13" fill="none"><rect x="0.5" y="0.5" width="22" height="11" rx="2.5" stroke="currentColor"/><rect x="2" y="2" width="19" height="8" rx="1" fill="currentColor"/><rect x="24" y="4.5" width="2" height="4" rx="0.5" fill="currentColor"/></svg>
     </span>
   </div>`;
@@ -1436,9 +1583,90 @@ function statusBar(dark) {
 /* ============ HOME TAB RENDERERS ============ */
 function homeTabHome() {
   return `
-    <div class="hero-banner">
-      <img src="_H안_자산/boats/boat-1.jpg" alt="" onerror="this.style.display='none'"/>
-      <div class="hero-pill">HANA INSURANCE PARTNER</div>
+    <div class="hero-banner hero-illust" onclick="goto('about_hana')" style="cursor:pointer;">
+      <svg class="hero-art" viewBox="0 0 393 196" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="heroSky" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#FFC48A"/>
+            <stop offset="0.35" stop-color="#E892A7"/>
+            <stop offset="0.7" stop-color="#6B6FAE"/>
+            <stop offset="1" stop-color="#2E3B7A"/>
+          </linearGradient>
+          <linearGradient id="heroSea" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#1D2E6A"/>
+            <stop offset="0.6" stop-color="#0D1A44"/>
+            <stop offset="1" stop-color="#050C26"/>
+          </linearGradient>
+          <radialGradient id="heroGlow" cx="0.72" cy="0.38" r="0.4">
+            <stop offset="0" stop-color="rgba(255,220,160,0.55)"/>
+            <stop offset="1" stop-color="rgba(255,220,160,0)"/>
+          </radialGradient>
+          <linearGradient id="shieldGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="rgba(126,195,255,0.42)"/>
+            <stop offset="1" stop-color="rgba(0,65,255,0.28)"/>
+          </linearGradient>
+          <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%">
+            <feGaussianBlur stdDeviation="1.2"/>
+          </filter>
+        </defs>
+        <!-- Sky gradient -->
+        <rect width="393" height="130" fill="url(#heroSky)"/>
+        <!-- Sun glow behind shield -->
+        <rect width="393" height="196" fill="url(#heroGlow)"/>
+        <!-- Soft sun disc -->
+        <circle cx="285" cy="72" r="26" fill="#FFE0A0" opacity="0.85" filter="url(#softGlow)"/>
+        <circle cx="285" cy="72" r="18" fill="#FFEFC4"/>
+        <!-- Distant horizon line -->
+        <rect x="0" y="128" width="393" height="1" fill="rgba(255,255,255,0.22)"/>
+        <!-- Ocean -->
+        <path d="M0 128 L393 128 L393 196 L0 196 Z" fill="url(#heroSea)"/>
+        <!-- Gentle waves -->
+        <path d="M0 150 Q50 145 100 150 T200 150 T300 150 T400 150" stroke="rgba(255,255,255,0.08)" stroke-width="1" fill="none"/>
+        <path d="M0 165 Q60 160 120 165 T240 165 T360 165 T480 165" stroke="rgba(255,255,255,0.06)" stroke-width="1" fill="none"/>
+        <path d="M0 180 Q50 176 100 180 T200 180 T300 180 T400 180" stroke="rgba(255,255,255,0.05)" stroke-width="1" fill="none"/>
+        <!-- Stars in upper sky -->
+        <circle cx="50" cy="24" r="0.8" fill="white" opacity="0.6"/>
+        <circle cx="95" cy="38" r="0.6" fill="white" opacity="0.45"/>
+        <circle cx="145" cy="18" r="0.7" fill="white" opacity="0.55"/>
+        <circle cx="340" cy="32" r="0.5" fill="white" opacity="0.45"/>
+        <!-- Protective shield (translucent) — 보험 상징 -->
+        <g transform="translate(196 104)">
+          <path d="M0 -46 C32 -46 54 -34 54 -34 L54 0 C54 22 30 38 0 46 C-30 38 -54 22 -54 0 L-54 -34 C-54 -34 -32 -46 0 -46 Z"
+                fill="url(#shieldGrad)" stroke="rgba(175,215,255,0.6)" stroke-width="1.2"/>
+          <path d="M-22 -4 L-6 12 L24 -18" stroke="rgba(255,255,255,0.85)" stroke-width="2.6" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </g>
+        <!-- Fishing boat silhouette (in front of shield) -->
+        <g transform="translate(168 110)">
+          <!-- Hull -->
+          <path d="M-32 12 Q-30 22 -18 24 L34 24 Q44 22 48 12 L-32 12 Z" fill="#0A1433"/>
+          <!-- Waterline reflection -->
+          <path d="M-32 12 L48 12" stroke="rgba(255,255,255,0.3)" stroke-width="0.8"/>
+          <!-- Cabin -->
+          <rect x="-10" y="-4" width="22" height="16" fill="#132149" rx="1.5"/>
+          <rect x="-8" y="-2" width="7" height="6" fill="rgba(255,214,140,0.75)"/>
+          <rect x="2" y="-2" width="7" height="6" fill="rgba(255,214,140,0.75)"/>
+          <!-- Mast + rigging -->
+          <line x1="4" y1="-4" x2="4" y2="-28" stroke="#0A1433" stroke-width="1.2"/>
+          <line x1="4" y1="-24" x2="-14" y2="-8" stroke="#0A1433" stroke-width="0.7"/>
+          <line x1="4" y1="-24" x2="22" y2="-8" stroke="#0A1433" stroke-width="0.7"/>
+          <!-- Small flag -->
+          <path d="M4 -28 L11 -26 L4 -24 Z" fill="#E85A48"/>
+          <!-- Antenna light -->
+          <circle cx="4" cy="-28" r="1.4" fill="#FFEFC4" filter="url(#softGlow)"/>
+        </g>
+        <!-- Small abstract fish pattern (trust + fishing) -->
+        <g transform="translate(82 170)" opacity="0.25">
+          <path d="M0 0 Q-6 -3 -10 0 Q-6 3 0 0 Z M-8 -0.5 L-12 -2 L-12 2 Z" fill="rgba(255,255,255,0.9)"/>
+        </g>
+        <g transform="translate(332 178)" opacity="0.2">
+          <path d="M0 0 Q5 -2 8 0 Q5 2 0 0 Z M6 -0.5 L10 -1.5 L10 1.5 Z" fill="rgba(255,255,255,0.9)"/>
+        </g>
+      </svg>
+      <div class="hero-pill hero-pill-logo">
+        <img src="assets/hana-logo.svg" alt="하나손해보험 심볼" class="hana-logo-img" onerror="this.style.display='none'; this.nextElementSibling.classList.add('show');"/>
+        <span class="hana-logo-text">하나손해보험</span>
+        <span class="hana-logo-wordmark">하나손해보험</span>
+      </div>
       <div class="hero-overlay">
         <div class="hero-kicker">어바웃피싱 × 하나손해보험</div>
         <div class="hero-title">낚시, 이제 걱정 없이 즐기세요</div>
@@ -1583,63 +1811,63 @@ function homeTabHome() {
     </div>
     <div class="catch-photo-grid">
       <div class="catch-photo">
-        <img src="_H안_자산/reviews/review-3.jpg" alt="광어" onerror="this.parentElement.remove()"/>
+        <img src="assets/reviews/review-3.jpg" alt="광어" onerror="this.parentElement.remove()"/>
         <div class="cp-label">
           <div class="cp-fish">광어 60cm+</div>
           <div class="cp-boat">대우호 · 방금 입항</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="_H안_자산/reviews/review-4.jpg" alt="갑오징어" onerror="this.parentElement.remove()"/>
+        <img src="assets/reviews/review-4.jpg" alt="갑오징어" onerror="this.parentElement.remove()"/>
         <div class="cp-label">
           <div class="cp-fish">주꾸미 · 갑오징어</div>
           <div class="cp-boat">삼성호 · 2시간 전</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="_H안_자산/reviews/review-5.jpg" alt="참돔" onerror="this.parentElement.remove()"/>
+        <img src="assets/reviews/review-5.jpg" alt="참돔" onerror="this.parentElement.remove()"/>
         <div class="cp-label">
           <div class="cp-fish">참돔 5kg</div>
           <div class="cp-boat">현대호 · 4시간 전</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="_H안_자산/reviews/review-1.jpg" alt="우럭" onerror="this.parentElement.remove()"/>
+        <img src="assets/reviews/review-1.jpg" alt="우럭" onerror="this.parentElement.remove()"/>
         <div class="cp-label">
           <div class="cp-fish">우럭 대물</div>
           <div class="cp-boat">삼성호 · 6시간 전</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="_H안_자산/reviews/review-2.jpg" alt="커플 출조" onerror="this.parentElement.remove()"/>
+        <img src="assets/reviews/review-2.jpg" alt="커플 출조" onerror="this.parentElement.remove()"/>
         <div class="cp-label">
           <div class="cp-fish">커플 첫 출조</div>
           <div class="cp-boat">대우호 · 어제</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="_H안_자산/catches/catch-1.jpg" alt="갈치" onerror="this.parentElement.remove()"/>
+        <img src="assets/catches/catch-1.jpg" alt="갈치" onerror="this.parentElement.remove()"/>
         <div class="cp-label">
           <div class="cp-fish">갈치 80cm급</div>
           <div class="cp-boat">만선호 · 5시간 전</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="_H안_자산/catches/catch-2.jpg" alt="감성돔" onerror="this.parentElement.remove()"/>
+        <img src="assets/catches/catch-2.jpg" alt="감성돔" onerror="this.parentElement.remove()"/>
         <div class="cp-label">
           <div class="cp-fish">감성돔 조황</div>
           <div class="cp-boat">대왕호 · 7시간 전</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="_H안_자산/catches/catch-3.jpg" alt="우럭" onerror="this.parentElement.remove()"/>
+        <img src="assets/catches/catch-3.jpg" alt="우럭" onerror="this.parentElement.remove()"/>
         <div class="cp-label">
           <div class="cp-fish">우럭 연타</div>
           <div class="cp-boat">영일호 · 어제</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="_H안_자산/boats/boat-4.jpg" alt="출항" onerror="this.parentElement.remove()"/>
+        <img src="assets/boats/boat-4.jpg" alt="출항" onerror="this.parentElement.remove()"/>
         <div class="cp-label">
           <div class="cp-fish">새벽 출항</div>
           <div class="cp-boat">성진호 · 어제</div>
@@ -1782,7 +2010,9 @@ function screenHome() {
 
     <div id="homeTabContent">${tabContent}</div>
 
-    <button class="fab-chat" title="채널톡 상담">${I.chatBubble}</button>
+    <div class="fab-layer">
+      <button class="fab-chat" title="채널톡 상담">${I.chatBubble}</button>
+    </div>
   `;
 }
 
@@ -1798,7 +2028,7 @@ function screenDetail() {
     </div>
 
     <div class="detail-hero" style="margin-top: -60px;">
-      <img src="_H안_자산/boats/boat-1.jpg" alt="삼성호" onerror="this.style.display='none'"/>
+      <img src="assets/boats/boat-1.jpg" alt="삼성호" onerror="this.style.display='none'"/>
       <div class="hero-dots-inner">
         <span class="active"></span><span></span><span></span><span></span><span></span>
       </div>
@@ -1825,10 +2055,13 @@ function screenDetail() {
 
     <div class="insure-banner">
       <div class="ib-top">
-        <span class="ib-chip-hana">하나손보 단체상해</span>
+        <span class="ib-chip-hana">
+          <img src="assets/hana-logo.svg" alt="하나손해보험" class="hana-logo-img" onerror="this.style.display='none'"/>
+          <span class="ib-chip-label">하나손해보험 단체상해</span>
+        </span>
       </div>
       <div class="ib-head">이 예약에는 단체상해보험이 포함돼요</div>
-      <div class="ib-desc">상해의료비 최대 3,000만원 · 배상책임 최대 5,000만원 · 사망담보 제외</div>
+      <div class="ib-desc">상해의료비 최대 3,000만원 · 배상책임 최대 5,000만원</div>
       <div class="ib-free">
         <span class="ibf-l">보험료 (${RESERVATION.passengers}인)</span>
         <span class="ibf-r"><span class="ibf-strike">${fmt(PRODUCT.premium_per_seat * RESERVATION.passengers)}원</span>무료</span>
@@ -2218,37 +2451,25 @@ function screenHandoff() {
       <div class="chc-head">
         <span class="chc-mark">HN</span>
         <div class="chc-head-text">
-          <div class="chc-title">하나손해보험 단체상해보험</div>
-          <div class="chc-sub">낚시어선 전용 · 승선자 전원 자동 가입</div>
+          <div class="chc-title">하나손해보험 단체상해</div>
+          <div class="chc-sub">낚시어선 전용 · 전원 자동가입</div>
         </div>
-        <span class="chc-free">내 부담 무료</span>
+        <span class="chc-free">무료</span>
       </div>
 
       <div class="chc-dl">
         <div class="chc-dk">보장 기간</div>
-        <div class="chc-dv">승선 ~ 하선 · 선상 시간</div>
+        <div class="chc-dv">승선 ~ 하선</div>
         <div class="chc-dk">피보험자</div>
-        <div class="chc-dv">${RESERVATION.booker} 외 ${RESERVATION.passengers - 1}명 · 총 ${RESERVATION.passengers}명</div>
+        <div class="chc-dv">${RESERVATION.booker} 외 ${RESERVATION.passengers - 1}명</div>
         <div class="chc-dk">보험료</div>
         <div class="chc-dv">
           <span class="chc-strike">${fmt(totalPremium)}원</span>
           <span class="chc-free-inline">무료</span>
-          <span class="chc-tag">플랫폼 부담</span>
+          <span class="chc-tag">플랫폼</span>
         </div>
       </div>
 
-      <div class="chc-cov-head">
-        <span class="chc-cov-label">주요 담보</span>
-        <span class="chc-cov-total">총 보장한도 1억 5,000만원</span>
-      </div>
-      <div class="chc-cov">
-        <div class="cov-row"><span class="k">상해의료비</span><span class="v">3,000만원</span></div>
-        <div class="cov-row"><span class="k">배상책임</span><span class="v">5,000만원</span></div>
-        <div class="cov-row"><span class="k">상해사망</span><span class="v">1억원</span></div>
-        <div class="cov-row"><span class="k">입원일당</span><span class="v">3만원/일</span></div>
-        <div class="cov-row"><span class="k">갑판 낙상</span><span class="v inc">포함</span></div>
-        <div class="cov-row"><span class="k">구조·응급</span><span class="v inc">포함</span></div>
-      </div>
 
       <div class="chc-next">
         <div class="chc-next-title">다음 단계 안내</div>
@@ -2552,7 +2773,10 @@ function screenDone() {
 
     <div class="alim-bubble hn">
       <div class="alim-sender">
-        <span class="alim-sender-av hn">HN</span>
+        <span class="alim-sender-av hn">
+          <img src="assets/hana-logo.svg" alt="하나손해보험" onerror="this.style.display='none'; this.nextElementSibling.classList.add('show');"/>
+          <span class="hana-fallback">HN</span>
+        </span>
         <div>
           <div class="alim-sender-name hn">하나손해보험</div>
           <div class="alim-sender-sub">알림톡 도착</div>
@@ -2589,10 +2813,230 @@ function screenDone() {
 }
 
 /* ============ RENDER ============ */
+/* ============ ABOUT HANA SUB-PAGE (홈 히어로 클릭 → 하나손보 상품 안내) ============ */
+function screenAboutHana() {
+  return `
+    <div class="sub-header sticky-top">
+      <button class="back-btn" onclick="goto('home')">${I.back}</button>
+      <div class="sh-title">하나손해보험 선상보험</div>
+      <div style="width: 32px;"></div>
+    </div>
+
+    <div class="ah-hero">
+      <span class="ah-eyebrow">HANA × ABOUT FISHING</span>
+      <div class="ah-title">선상 사고, 이제<br/>걱정 없이 출조하세요</div>
+      <div class="ah-subtitle">플랫폼이 계약·보험료를 부담하는<br/>선상 상해 한정형 단체보장</div>
+      <div class="ah-stats">
+        <div class="ah-stat">소비자 부담 <b style="color:#4FD4C4;">0원</b></div>
+        <div class="ah-stat">선상 상해 한정형</div>
+        <div class="ah-stat">선상 체류 시간만 보장</div>
+        <div class="ah-stat">하나손해보험 단체계약</div>
+      </div>
+    </div>
+
+    <div class="ah-section">
+      <div class="ah-label">WHY HANA</div>
+      <div class="ah-stitle">어바웃피싱이<br/>대신 가입·부담합니다</div>
+      <div class="ah-sbody">어바웃피싱이 보험계약자이자 보험료 부담자로, 예약 완료 후 동의한 실제 탑승객을 피보험자로 편입하는 <b style="color:var(--af-blue);">기업제휴형 단체보장</b> 모델입니다.</div>
+      <div class="ah-icons">
+        <div class="ah-icon-row">
+          <span class="ah-ico">${I.creditCard}</span>
+          <div class="ah-icon-info">
+            <div class="ah-it">소비자 부담 0원</div>
+            <div class="ah-id">어바웃피싱이 보험계약자·보험료 전액 부담</div>
+          </div>
+        </div>
+        <div class="ah-icon-row">
+          <span class="ah-ico">${I.check}</span>
+          <div class="ah-icon-info">
+            <div class="ah-it">동의 후 편입</div>
+            <div class="ah-id">하나손보 전용 페이지에서 보장 설명·동의 후 피보험자로 편입</div>
+          </div>
+        </div>
+        <div class="ah-icon-row">
+          <span class="ah-ico">${I.lock}</span>
+          <div class="ah-icon-info">
+            <div class="ah-it">선상 상해 한정형</div>
+            <div class="ah-id">출항 중 선박 내·선상 체류 중 상해만 보장 (사망 제외)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ah-section">
+      <div class="ah-label">COVERAGE</div>
+      <div class="ah-stitle">선상 상해 단독 정액 담보</div>
+      <div class="ah-sbody">세부 담보 구성·한도·요율은 하나손해보험이 설계·산정합니다. 아래는 상품 구조 요약입니다.</div>
+      <div class="ah-kv">
+        <div class="ah-kv-row">
+          <div class="ah-kv-label">계약 형태<small>기업제휴형 단체계약 (마스터 계약)</small></div>
+          <div class="ah-kv-val" style="font-size: 12px;">단체보장</div>
+        </div>
+        <div class="ah-kv-row">
+          <div class="ah-kv-label">보험계약자<small>어바웃피싱이 계약 주체</small></div>
+          <div class="ah-kv-val" style="font-size: 12px;">어바웃피싱</div>
+        </div>
+        <div class="ah-kv-row">
+          <div class="ah-kv-label">보험료 부담<small>연간 일괄 선납 + 연말 정산</small></div>
+          <div class="ah-kv-val" style="font-size: 12px;">어바웃피싱</div>
+        </div>
+        <div class="ah-kv-row">
+          <div class="ah-kv-label">피보험자<small>전용 페이지에서 동의 완료된 실제 탑승객</small></div>
+          <div class="ah-kv-val" style="font-size: 12px;">편입 탑승객</div>
+        </div>
+        <div class="ah-kv-row">
+          <div class="ah-kv-label">보장 범위<small>출항 중 선박 내 · 선상 체류 중 상해</small></div>
+          <div class="ah-kv-val" style="font-size: 12px;">정액 담보</div>
+        </div>
+        <div class="ah-kv-foot">
+          <span>담보 유형</span>
+          <span>선상 상해 한정형 · 사망담보 제외</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="ah-section">
+      <div class="ah-label">EXCLUSIONS</div>
+      <div class="ah-stitle">보장되지 않는 상황</div>
+      <div class="ah-sbody">아래 시간·상황은 본 제휴 보험의 보장 범위에 포함되지 않습니다.</div>
+      <div class="ah-kv" style="border-color: rgba(196,0,5,0.15);">
+        <div class="ah-kv-row">
+          <div class="ah-kv-label">집결지 · 선착장 이동/대기</div>
+          <div class="ah-kv-val" style="color: #C40005; font-size: 12px;">제외</div>
+        </div>
+        <div class="ah-kv-row">
+          <div class="ah-kv-label">승·하선 전후 시간</div>
+          <div class="ah-kv-val" style="color: #C40005; font-size: 12px;">제외</div>
+        </div>
+        <div class="ah-kv-row">
+          <div class="ah-kv-label">귀가 · 이동 중</div>
+          <div class="ah-kv-val" style="color: #C40005; font-size: 12px;">제외</div>
+        </div>
+        <div class="ah-kv-row">
+          <div class="ah-kv-label">숙박 · 식음 관련</div>
+          <div class="ah-kv-val" style="color: #C40005; font-size: 12px;">제외</div>
+        </div>
+        <div class="ah-kv-row">
+          <div class="ah-kv-label">사망 담보</div>
+          <div class="ah-kv-val" style="color: #C40005; font-size: 12px;">제외</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ah-section">
+      <div class="ah-label">ENROLLMENT PROCESS</div>
+      <div class="ah-stitle">4단계 · 약 2분 소요</div>
+      <div class="ah-sbody">AF는 예약·URL 안내만, 모집·체결은 하나손보 전용 페이지에서 수행됩니다.</div>
+      <div class="ah-hsteps">
+        <div class="ah-hs-col">
+          <span class="ah-hs-num">1</span>
+          <div class="ah-hs-label">예약 · 결제</div>
+          <div class="ah-hs-desc">AF에서 선박<br/>좌석 예약</div>
+        </div>
+        <div class="ah-hs-col">
+          <span class="ah-hs-num">2</span>
+          <div class="ah-hs-label">URL 안내</div>
+          <div class="ah-hs-desc">무료 안전보장<br/>신청 URL 제공</div>
+        </div>
+        <div class="ah-hs-col">
+          <span class="ah-hs-num">3</span>
+          <div class="ah-hs-label">동의 · 편입</div>
+          <div class="ah-hs-desc">하나손보 페이지<br/>보장 설명·동의</div>
+        </div>
+        <div class="ah-hs-col">
+          <span class="ah-hs-num">4</span>
+          <div class="ah-hs-label">가입증명서</div>
+          <div class="ah-hs-desc">하나손보가<br/>증명서 발송</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ah-section">
+      <div class="ah-label">CLAIM</div>
+      <div class="ah-stitle">사고 발생 시</div>
+      <div class="ah-sbody">피보험자가 하나손해보험에 직접 청구하며, 어바웃피싱은 승선사실 확인을 지원합니다.</div>
+      <div class="ah-icons">
+        <div class="ah-icon-row">
+          <span class="ah-ico">${I.phone}</span>
+          <div class="ah-icon-info">
+            <div class="ah-it">하나손보 직접 청구</div>
+            <div class="ah-id">피보험자 → 하나손보 고객센터로 보험금 청구 · 심사 · 지급</div>
+          </div>
+        </div>
+        <div class="ah-icon-row">
+          <span class="ah-ico">${I.check}</span>
+          <div class="ah-icon-info">
+            <div class="ah-it">AF 승선사실 확인</div>
+            <div class="ah-id">어바웃피싱은 예약·탑승 사실 확인 지원 (판매 당사자 아님)</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ah-section">
+      <div class="ah-label">FAQ</div>
+      <div class="ah-stitle">자주 묻는 질문</div>
+      <div class="ah-faq">
+        <div class="ah-faq-item open" onclick="this.classList.toggle('open')">
+          <div class="ah-faq-q"><span class="q-mark">Q</span><span class="q-txt">정말 무료인가요?</span><span class="q-chev">${I.chevronDown}</span></div>
+          <div class="ah-faq-a">네, 소비자 부담은 0원입니다. 어바웃피싱이 보험계약자이자 보험료 부담자로서 연간 일괄 선납 형태로 부담합니다. 예약 결제에 보험료가 포함되지 않으며, 별도 청구도 없습니다.</div>
+        </div>
+        <div class="ah-faq-item" onclick="this.classList.toggle('open')">
+          <div class="ah-faq-q"><span class="q-mark">Q</span><span class="q-txt">예약만 하면 자동으로 보장되나요?</span><span class="q-chev">${I.chevronDown}</span></div>
+          <div class="ah-faq-a">예약만으로는 보장되지 않습니다. 예약 후 어바웃피싱이 안내하는 URL을 통해 하나손보 전용 페이지에서 보장 설명을 확인하고 동의 · 편입을 완료해야 피보험자로 등록됩니다.</div>
+        </div>
+        <div class="ah-faq-item" onclick="this.classList.toggle('open')">
+          <div class="ah-faq-q"><span class="q-mark">Q</span><span class="q-txt">언제 어디까지 보장되나요?</span><span class="q-chev">${I.chevronDown}</span></div>
+          <div class="ah-faq-a">출항 중 선박 내 · 선상 체류 중 상해만 보장됩니다. 집결지 이동, 승·하선 전후, 귀가, 숙박·식음 시간은 보장 범위에서 제외되며, 사망 담보도 포함되지 않습니다.</div>
+        </div>
+        <div class="ah-faq-item" onclick="this.classList.toggle('open')">
+          <div class="ah-faq-q"><span class="q-mark">Q</span><span class="q-txt">가입증명서는 어디서 받나요?</span><span class="q-chev">${I.chevronDown}</span></div>
+          <div class="ah-faq-a">하나손해보험 전용 페이지에서 편입 완료 시 가입증명서가 발급되어 발송됩니다. 어바웃피싱 앱에서는 "보험 완료/미완료" 상태만 확인할 수 있습니다.</div>
+        </div>
+        <div class="ah-faq-item" onclick="this.classList.toggle('open')">
+          <div class="ah-faq-q"><span class="q-mark">Q</span><span class="q-txt">사고가 나면 어디로 연락하나요?</span><span class="q-chev">${I.chevronDown}</span></div>
+          <div class="ah-faq-a">피보험자가 하나손해보험에 직접 청구합니다. 청구 접수·심사·지급은 전부 하나손보가 담당하며, 어바웃피싱은 예약·탑승 사실 확인을 지원합니다.</div>
+        </div>
+        <div class="ah-faq-item" onclick="this.classList.toggle('open')">
+          <div class="ah-faq-q"><span class="q-mark">Q</span><span class="q-txt">어바웃피싱이 보험을 판매하나요?</span><span class="q-chev">${I.chevronDown}</span></div>
+          <div class="ah-faq-a">아닙니다. 모집·체결 관련 고객 접점은 전부 하나손해보험 전용 페이지에서 운영되며, 어바웃피싱은 유입 채널 역할만 수행합니다. 판매 당사자는 하나손해보험입니다.</div>
+        </div>
+        <div class="ah-faq-item" onclick="this.classList.toggle('open')">
+          <div class="ah-faq-q"><span class="q-mark">Q</span><span class="q-txt">보장한도와 담보 세부내역이 궁금합니다.</span><span class="q-chev">${I.chevronDown}</span></div>
+          <div class="ah-faq-a">세부 담보 구성·한도·요율은 하나손해보험이 설계·산정합니다. 정확한 보장 내역은 하나손보 전용 페이지의 보장 설명 및 약관에서 확인하실 수 있습니다.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ah-section">
+      <div class="ah-callout neutral">
+        <div class="ah-co-title">상품 핵심 요약</div>
+        <div class="ah-co-body">• 계약 형태: 하나손해보험 × 어바웃피싱 기업제휴형 단체계약 (마스터 계약)
+• 보험계약자 · 보험료 부담자: 어바웃피싱 (소비자 부담 없음)
+• 피보험자: 예약 완료 후 하나손보 전용 페이지에서 동의 완료된 실제 탑승객
+• 보장 범위: 출항 중 선박 내 · 선상 체류 중 상해 (정액 담보, 사망 제외)
+• 주요 제외: 집결지·선착장 이동/대기, 승·하선 전후, 귀가, 숙박·식음, 사망담보
+• 정산: 연간 일괄 선납 + 연말 정산 (연 단위 요율 고정)</div>
+      </div>
+    </div>
+
+    <div class="ah-legal-foot">
+      본 페이지는 어바웃피싱 × 하나손해보험 기업제휴형 단체계약의 개요를 안내합니다. 세부 담보 구성·한도·요율은 하나손해보험이 설계하며 변동될 수 있습니다. 정확한 보장 범위·면책사항·청구 절차는 하나손해보험 전용 가입 페이지의 약관 및 상품설명서를 참고하시기 바랍니다. 어바웃피싱은 보험 판매 당사자가 아닌 예약·유입 채널입니다.
+    </div>
+
+    <div style="height: 20px;"></div>
+
+    <div class="cta-floating-bar">
+      <button class="cta-btn" onclick="goto('home')">확인했어요</button>
+    </div>
+  `;
+}
+
 const RENDERERS = {
   home: screenHome, detail: screenDetail, passenger: screenPassenger, payment: screenPayment,
   handoff: screenHandoff, hana_web: screenHanaWeb, hana_terms: screenHanaTerms,
   pass: screenPass, hana_done: screenHanaDone, done: screenDone,
+  about_hana: screenAboutHana,
 };
 
 function renderPlanbar() {
@@ -2627,7 +3071,8 @@ function renderFlowbar() {
 
 function renderOwnerChip() {
   const flow = FLOW_H.find(s => s.id === state.flow);
-  const owner = OWNER_LABELS[flow.chipKind];
+  const chipKind = flow ? flow.chipKind : 'af';
+  const owner = OWNER_LABELS[chipKind];
   const el = document.getElementById('ownerChip');
   el.className = `owner-chip ${owner.cls}`;
   el.innerHTML = `<span class="owner-dot"></span>${owner.label}`;
@@ -2648,7 +3093,7 @@ function renderStage(animClass) {
 }
 
 function renderPanel() {
-  const b = BRIEFING[state.flow];
+  const b = BRIEFING[state.flow] || BRIEFING.home;
   const el = document.getElementById('panel');
   const fitLabel = b.fit.v === 'ok' ? '● FIT · OK' : b.fit.v === 'warn' ? '⚠ FIT · WARN' : '✕ FIT · CONFLICT';
   el.innerHTML = `
