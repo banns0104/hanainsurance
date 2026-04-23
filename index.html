@@ -147,6 +147,20 @@
   .hero-banner { margin: 14px 20px 0; border-radius: var(--radius-lg); height: 196px; position: relative; overflow: hidden; background: var(--surface-2); }
   .hero-banner img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .hero-banner .hero-img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+
+  /* ============ IMAGE FALLBACKS (깃헙 페이지스 자산 누락 대응) ============ */
+  .hero-banner.no-img { background: linear-gradient(135deg, #FFC48A 0%, #E892A7 35%, #4A6AB8 70%, #1D2E6A 100%); }
+  .hero-banner.no-img::before { content: ''; position: absolute; inset: 0; background: radial-gradient(circle at 75% 40%, rgba(255,220,160,0.45) 0%, transparent 50%); z-index: 1; }
+  .hero-banner.no-img::after { content: ''; position: absolute; left: 50%; bottom: 30%; transform: translateX(-50%); width: 80px; height: 30px; background: rgba(10,20,50,0.55); clip-path: polygon(10% 50%, 20% 30%, 80% 30%, 90% 50%, 85% 100%, 15% 100%); z-index: 1; }
+  .boat-thumb.no-img { background: linear-gradient(135deg, #87B5D8 0%, #4A85AD 100%); position: relative; }
+  .boat-thumb.no-img::after { content: '⛴'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 22px; color: rgba(255,255,255,0.6); }
+  .catch-photo.no-img { background: linear-gradient(135deg, #7FB5D9 0%, #2C5F87 100%); position: relative; }
+  .catch-photo.no-img::after { content: '조황'; position: absolute; top: 35%; left: 50%; transform: translate(-50%, -50%); font-size: 13px; font-weight: 800; color: rgba(255,255,255,0.55); letter-spacing: -0.3px; }
+  .detail-hero.no-img { background: linear-gradient(135deg, #87B5D8 0%, #2C5F87 100%); position: relative; }
+  .detail-hero.no-img::after { content: '⛴'; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); font-size: 64px; color: rgba(255,255,255,0.35); }
+  .cpi.no-img { background: linear-gradient(135deg, #6B8E4A 0%, #4A6B30 100%); }
+  .cpi.no-img::after { content: ''; position: absolute; inset: 40% 45%; border-radius: 50%; background: rgba(255,255,255,0.25); }
+  .hot-card .boat-thumb.no-img::after { font-size: 28px; }
   .hero-pill { position: absolute; top: 14px; left: 14px; display: inline-flex; align-items: center; gap: 6px; padding: 6px 12px; border-radius: var(--radius-pill); background: rgba(255,255,255,0.95); font-size: 11px; font-weight: 800; color: #009490; letter-spacing: var(--letter-tight); z-index: 2; }
   .hero-pill::before { content: ''; width: 6px; height: 6px; border-radius: 50%; background: #009490; }
   .hero-overlay { position: absolute; left: 0; right: 0; bottom: 0; padding: 14px 16px 16px; background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.55) 55%, rgba(0,0,0,0.88) 100%); color: white; }
@@ -795,6 +809,8 @@
   /* ============ 02 DETAIL — 최근 후기 조과사진 (실제 유저 업로드) ============ */
   .review-card .rc-photos { margin-top: 10px; display: grid; grid-template-columns: repeat(3, 1fr); gap: 5px; }
   .review-card .rc-photo { aspect-ratio: 1 / 1; border-radius: var(--radius-md); background: var(--surface-2); position: relative; overflow: hidden; cursor: pointer; }
+  .review-card .rc-photo.no-img { background: linear-gradient(135deg, #87B5D8 0%, #4A85AD 100%); }
+  .review-card .rc-photo.no-img::after { content: '조황'; position: absolute; top: 40%; left: 50%; transform: translate(-50%, -50%); font-size: 11px; font-weight: 800; color: rgba(255,255,255,0.6); }
   .review-card .rc-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
   .review-card .rc-photo .rc-cap { position: absolute; bottom: 0; left: 0; right: 0; padding: 16px 6px 5px; background: linear-gradient(to top, rgba(0,0,0,0.55), transparent); font-size: 10px; color: white; font-weight: 700; letter-spacing: -0.2px; z-index: 2; }
   .review-card .rc-photo.fallback::after { content: attr(data-fallback); position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; color: var(--fg-4); font-weight: 600; }
@@ -1404,7 +1420,7 @@ const RC_PHOTOS = {
 };
 function rcPhoto(filename, cap) {
   // 실제 유저 업로드 후기 사진. 파일 로드 실패 시 해당 슬롯 전체 제거.
-  return `<div class="rc-photo"><img src="assets/reviews/${filename}" alt="${cap}" onerror="this.parentElement.remove()"/><span class="rc-cap">${cap}</span></div>`;
+  return `<div class="rc-photo"><img src="assets/reviews/${filename}" alt="${cap}" onerror="this.style.display='none';this.parentElement.classList.add('no-img')"/><span class="rc-cap">${cap}</span></div>`;
 }
 
 /* ============ 최근 입항 실사 SVG (첨부 사진 재현) ============ */
@@ -1574,7 +1590,7 @@ function homeTabHome() {
   return `
     <div class="hero-banner" onclick="goto('about_hana')" style="cursor:pointer;">
       <img src="assets/hero-boat.jpg" alt="" class="hero-img"
-           onerror="this.onerror=null; this.src='assets/boats/boat-1.jpg';"/>
+           onerror="if(!this.dataset.t){this.dataset.t='1';this.src='assets/boats/boat-1.jpg';}else{this.style.display='none';this.parentElement.classList.add('no-img');}"/>
       <div class="hero-pill">HANA INSURANCE PARTNER</div>
       <div class="hero-overlay">
         <div class="hero-kicker">어바웃피싱 × 하나손해보험</div>
@@ -1661,7 +1677,7 @@ function homeTabHome() {
       ${BOATS.map(b => `
         <div class="hot-card" onclick="goto('detail')">
           <div class="hc-img">
-            <img src="${b.img}" alt="${b.name}" onerror="this.style.background='var(--surface-2)';this.style.display='none'"/>
+            <img src="${b.img}" alt="${b.name}" onerror="this.style.display='none';this.parentElement.classList.add('no-img')"/>
             <span class="hc-live">실시간 ${b.live}</span>
             <span class="hc-free">무료보험</span>
           </div>
@@ -1697,7 +1713,7 @@ function homeTabHome() {
       ${BOATS.map(b => `
         <div class="boat-card" onclick="goto('detail')">
           <div class="boat-thumb">
-            <img src="${b.img}" alt="${b.name}" onerror="this.style.display='none';this.parentElement.style.background='var(--surface-2)'"/>
+            <img src="${b.img}" alt="${b.name}" onerror="this.style.display='none';this.parentElement.classList.add('no-img')"/>
             <span class="tb-live">실시간 ${b.live}</span>
           </div>
           <div class="boat-info">
@@ -1720,63 +1736,63 @@ function homeTabHome() {
     </div>
     <div class="catch-photo-grid">
       <div class="catch-photo">
-        <img src="assets/reviews/review-3.jpg" alt="광어" onerror="this.parentElement.remove()"/>
+        <img src="assets/reviews/review-3.jpg" alt="광어" onerror="this.style.display='none';this.parentElement.classList.add('no-img')"/>
         <div class="cp-label">
           <div class="cp-fish">광어 60cm+</div>
           <div class="cp-boat">대우호 · 방금 입항</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="assets/reviews/review-4.jpg" alt="갑오징어" onerror="this.parentElement.remove()"/>
+        <img src="assets/reviews/review-4.jpg" alt="갑오징어" onerror="this.style.display='none';this.parentElement.classList.add('no-img')"/>
         <div class="cp-label">
           <div class="cp-fish">주꾸미 · 갑오징어</div>
           <div class="cp-boat">삼성호 · 2시간 전</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="assets/reviews/review-5.jpg" alt="참돔" onerror="this.parentElement.remove()"/>
+        <img src="assets/reviews/review-5.jpg" alt="참돔" onerror="this.style.display='none';this.parentElement.classList.add('no-img')"/>
         <div class="cp-label">
           <div class="cp-fish">참돔 5kg</div>
           <div class="cp-boat">현대호 · 4시간 전</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="assets/reviews/review-1.jpg" alt="우럭" onerror="this.parentElement.remove()"/>
+        <img src="assets/reviews/review-1.jpg" alt="우럭" onerror="this.style.display='none';this.parentElement.classList.add('no-img')"/>
         <div class="cp-label">
           <div class="cp-fish">우럭 대물</div>
           <div class="cp-boat">삼성호 · 6시간 전</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="assets/reviews/review-2.jpg" alt="커플 출조" onerror="this.parentElement.remove()"/>
+        <img src="assets/reviews/review-2.jpg" alt="커플 출조" onerror="this.style.display='none';this.parentElement.classList.add('no-img')"/>
         <div class="cp-label">
           <div class="cp-fish">커플 첫 출조</div>
           <div class="cp-boat">대우호 · 어제</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="assets/catches/catch-1.jpg" alt="갈치" onerror="this.parentElement.remove()"/>
+        <img src="assets/catches/catch-1.jpg" alt="갈치" onerror="this.style.display='none';this.parentElement.classList.add('no-img')"/>
         <div class="cp-label">
           <div class="cp-fish">갈치 80cm급</div>
           <div class="cp-boat">만선호 · 5시간 전</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="assets/catches/catch-2.jpg" alt="감성돔" onerror="this.parentElement.remove()"/>
+        <img src="assets/catches/catch-2.jpg" alt="감성돔" onerror="this.style.display='none';this.parentElement.classList.add('no-img')"/>
         <div class="cp-label">
           <div class="cp-fish">감성돔 조황</div>
           <div class="cp-boat">대왕호 · 7시간 전</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="assets/catches/catch-3.jpg" alt="우럭" onerror="this.parentElement.remove()"/>
+        <img src="assets/catches/catch-3.jpg" alt="우럭" onerror="this.style.display='none';this.parentElement.classList.add('no-img')"/>
         <div class="cp-label">
           <div class="cp-fish">우럭 연타</div>
           <div class="cp-boat">영일호 · 어제</div>
         </div>
       </div>
       <div class="catch-photo">
-        <img src="assets/boats/boat-4.jpg" alt="출항" onerror="this.parentElement.remove()"/>
+        <img src="assets/boats/boat-4.jpg" alt="출항" onerror="this.style.display='none';this.parentElement.classList.add('no-img')"/>
         <div class="cp-label">
           <div class="cp-fish">새벽 출항</div>
           <div class="cp-boat">성진호 · 어제</div>
@@ -1832,7 +1848,7 @@ function homeTabExplore() {
       ${BOATS.concat(BOATS).map((b,i) => `
         <div class="boat-card" onclick="goto('detail')">
           <div class="boat-thumb">
-            <img src="${b.img}" alt="${b.name}" onerror="this.style.display='none';this.parentElement.style.background='var(--surface-2)'"/>
+            <img src="${b.img}" alt="${b.name}" onerror="this.style.display='none';this.parentElement.classList.add('no-img')"/>
             <span class="tb-live">실시간 ${b.live + (i>3?1:0)}</span>
           </div>
           <div class="boat-info">
@@ -1937,7 +1953,7 @@ function screenDetail() {
     </div>
 
     <div class="detail-hero" style="margin-top: -60px;">
-      <img src="assets/boats/boat-1.jpg" alt="삼성호" onerror="this.style.display='none'"/>
+      <img src="assets/boats/boat-1.jpg" alt="삼성호" onerror="this.style.display='none';this.parentElement.classList.add('no-img')"/>
       <div class="hero-dots-inner">
         <span class="active"></span><span></span><span></span><span></span><span></span>
       </div>
